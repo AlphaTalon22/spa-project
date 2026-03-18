@@ -1,0 +1,32 @@
+#Nombre del archivo
+name : CI Pipeline
+
+#Sobre donde trabaja:
+on:
+  pull_request:
+  push:
+   branches:
+     - develop
+
+#Acciones que ejecutara el servidor de GitHub Actions:
+jobs:
+  frontend-build:
+    runs-on: ubuntu-latst
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+     #es como hacer un: git clone.....del proyecto a la maquina
+    - name: Chekout repository
+      uses: actions/checkout@4
+
+    - name: Setup Node
+      uses: actions/setup-node@4
+      with:
+        node-version: '20'
+    - name: Install dependencies
+      run: npm Install
+    - name: Build frontend
+      run: npm run install 
